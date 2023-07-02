@@ -1,6 +1,8 @@
 package com.learn.java8.streams;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,12 +10,14 @@ import java.util.stream.IntStream;
 
 public class NumericStream {
 
+    @DisplayName("Reduce integers")
     @Test
     public void testIntStream1(){
         List<Integer> intList = Arrays.asList(1,4,8,5,6,10);
         int result = intList.stream()
                 .reduce(0,(a,b)->a+b);
         System.out.println("IntStream.testIntStream1:"+result);
+        Assertions.assertEquals(34,result);
         //unboxing to convert Integer to int
     }
 

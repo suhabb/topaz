@@ -65,7 +65,4 @@ public class StreamFilterOperations {
                 .sorted(Comparator.comparing(Student::getName).reversed())
                 .forEach(System.out::println);
     }
-
-
-
 }

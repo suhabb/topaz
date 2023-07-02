@@ -4,13 +4,17 @@ package com.learn.java8.streams;
 import com.learn.java8.streams.data.StudentDataBase;
 import com.learn.java8.streams.data.Student;
 import com.learn.java8.streams.data.Bike;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+@ExtendWith(MockitoExtension.class)
 public class OptionalExample {
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testOptional1(){
         Optional<String> hello = Optional.ofNullable("Hello");
         System.out.println("OptionalExample.testOptional1:"+hello.get());

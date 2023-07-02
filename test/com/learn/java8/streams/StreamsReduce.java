@@ -7,9 +7,15 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.junit.Assert.assertEquals;
 
 public class StreamsReduce {
 
@@ -23,6 +29,7 @@ public class StreamsReduce {
         int result = intList.stream()
                 .reduce(1, (a, b) -> a * b);
         System.out.println("StreamsReduce.testReduce:" + result);
+        assertEquals(105,result);
     }
 
     @Test
@@ -32,15 +39,16 @@ public class StreamsReduce {
         int result = intList.stream()
                 .reduce(0, (a, b) -> a * b);// be carefull what is your inital param
         System.out.println("StreamsReduce.testReduce:" + result);
+        Assert.assertEquals(0,0);
     }
 
     @Test
     public void testReduce3() {
         List<Integer> intList = Arrays.asList(1, 3, 5, 7);
 
-        Optional<Integer> result = intList.stream()
-                .reduce((a, b) -> a * b);// without first param it returns optional
-        System.out.println("StreamsReduce.testReduce:" + result.get());
+        Integer result = intList.stream()
+                .reduce((a, b) -> a * b).get();// without first param it returns optional
+        System.out.println("StreamsReduce.testReduce:" + result);
     }
 
     @Test
@@ -97,7 +105,7 @@ public class StreamsReduce {
                 .stream()
                 .reduce("", (partialString, element) -> partialString + element);
         System.out.println("StreamsReduce.testReduce9:" + result);
-        Assert.assertEquals("abcde", result);
+        assertEquals("abcde", result);
     }
 
     @Test
@@ -107,7 +115,7 @@ public class StreamsReduce {
                 .stream()
                 .reduce("", String::concat);
         System.out.println("StreamsReduce.testReduce9:" + result);
-        Assert.assertEquals("abcde", result);
+        assertEquals("abcde", result);
     }
 
     @Test
@@ -131,5 +139,10 @@ public class StreamsReduce {
                     return p + q;
                 });
         System.out.println(arrSum);
+    }
+
+    @Test
+    public void test(){
+
     }
 }
