@@ -5,12 +5,14 @@ import com.learn.java8.streams.data.Student;
 import com.learn.java8.streams.data.Bike;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.collectingAndThen;
@@ -106,6 +108,29 @@ public class StreamsGroupBy {
         System.out.println("StreamsGroupBy.streamGroupBy9" +
                 ":"+map);
     }
+    @org.junit.jupiter.api.Test
+    public void givenString_concat_returnString() {
+        List<Book> books = Arrays.asList(
+                new Book(1, "Modern Java Recipes", 49.99),
+                new Book(2, "Java 8 in Action", 49.99),
+                new Book(3, "Java SE8 for the Really Impatient", 39.99),
+                new Book(4, "Functional Programming in Java", 27.64),
+                new Book(5, "Making Java Groovy", 45.99),
+                new Book(6, "Gradle Recipes for Android", 23.76));
+        Map<Integer, Book> collect = books.stream()
+                .collect(Collectors.toMap(Book::getId, Function.identity()));
+        collect.forEach((key,book)->{
+            System.out.println("AppTest.givenString_concat_returnString:"+key+":"+book.getName());
+        });
 
+        List<String> strings = Arrays.asList("this", "is", "a", "long", "list", "of",
+                "strings", "to", "use", "as", "a", "demo");
+        Map<Integer, List<String>> lengthMap = strings.stream()
+                .collect(Collectors.groupingBy(String::length));
+        lengthMap.forEach((key,value)->{
+            System.out.println("AppTest.givenString_concat_returnString:"+key+":"+value);
+        });
+    }
 
 }
+

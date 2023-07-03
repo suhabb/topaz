@@ -15,9 +15,9 @@ import java.util.Optional;
 public class OptionalExample {
 
     @org.junit.jupiter.api.Test
-    public void testOptional1(){
+    public void testOptional1() {
         Optional<String> hello = Optional.ofNullable("Hello");
-        System.out.println("OptionalExample.testOptional1:"+hello.get());
+        System.out.println("OptionalExample.testOptional1:" + hello.get());
     }
 
     @Test
@@ -42,32 +42,33 @@ public class OptionalExample {
     @Test
     public void testOptional5() {
         String name = StudentDataBase.getOptionalStudent()
-                .filter(s->s.getGpa()>5)//to get empty
+                .filter(s -> s.getGpa() > 5)//to get empty
                 .map(Student::getName)
                 .orElse("John Doe");
-        System.out.println("OptionalExample.testOptional5:"+name);
+        System.out.println("OptionalExample.testOptional5:" + name);
     }
 
     @Test
     public void testOptional6() {
         String name = StudentDataBase.getOptionalStudent()
-                .filter(s->s.getGpa()>5)
+                .filter(s -> s.getGpa() > 5)
                 .map(Student::getName)
-                .orElseGet(()->"John Doe");
-        System.out.println("OptionalExample.testOptional5:"+name);
+                .orElseGet(() -> "John Doe");
+        System.out.println("OptionalExample.testOptional5:" + name);
     }
+
     @Test
     public void testOptional7() {
         String name = StudentDataBase.getOptionalStudent()
-                .filter(s->s.getGpa()>5)
+                .filter(s -> s.getGpa() > 5)
                 .map(Student::getName)
-                .orElseThrow(()->new RuntimeException("Empty Name"));
+                .orElseThrow(() -> new RuntimeException("Empty Name"));
     }
 
     @Test
     public void testOptional8() {
         StudentDataBase.getOptionalStudent()
-                .filter(s->s.getGpa()>3)
+                .filter(s -> s.getGpa() > 3)
                 .ifPresent(student -> System.out.println(student.getName()));
         System.out.println("OptionalExample.testOptional8:");
     }
@@ -75,23 +76,44 @@ public class OptionalExample {
     @Test
     public void testOptional9() {
         Optional<String> name = StudentDataBase.getOptionalStudent()
-                .filter(s->s.getGpa()>3)
+                .filter(s -> s.getGpa() > 3)
                 .map(Student::getName);
-        System.out.println("OptionalExample.testOptional8:"+name);
+        System.out.println("OptionalExample.testOptional8:" + name);
     }
 
     @Test
     public void testOptional10() {
         Optional<String> name = StudentDataBase.getOptionalStudent()
-                .filter(s->s.getGpa()>3)
+                .filter(s -> s.getGpa() > 3)
                 .flatMap(Student::getBike)// get of type Bike optional //returns Optional<Bike>
                 .map(Bike::getName);//get bike name
-        System.out.println("OptionalExample.testOptional8:BikeName:"+name.get());
+        System.out.println("OptionalExample.testOptional8:BikeName:" + name.get());
     }
 
 
+}
 
 
+class Manager {
+    private String name;
 
+    public Manager(String name) {
+        this.name = name;
+    }
 
+    public String getName() {
+        return name;
+    }
+}
+
+class Department {
+    private Manager boss;
+
+    public Optional<Manager> getBoss() {
+        return Optional.ofNullable(boss);
+    }
+
+    void setBoss(Manager boss) {
+        this.boss = boss;
+    }
 }
